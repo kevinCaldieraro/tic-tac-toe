@@ -12,6 +12,9 @@ let winStates = [
   [0, 4, 8],
   [2, 4, 6]
 ];
+let winsPlayerO = 0;
+let winsPlayerX = 0;
+let draws = 0;
 
 function handleMove(position) {
   if (gameOver) {
@@ -21,11 +24,13 @@ function handleMove(position) {
     board[position] = symbols[playerTime];
 
     gameOver = isWin();
+    isDraw();
 
     if (gameOver == false) {
       playerTime = playerTime == 0 ? 1 : 0;
     }
   }
+  // isDraw();
   return gameOver;
 }
 
@@ -46,4 +51,27 @@ function isWin() {
   }
 
   return false;
+}
+
+function isDraw() {
+  if (
+    board[0] != '' &&
+    board[1] != '' &&
+    board[2] != '' &&
+    board[3] != '' &&
+    board[4] != '' &&
+    board[5] != '' &&
+    board[6] != '' &&
+    board[7] != '' &&
+    board[8] != ''
+  ) {
+    return (gameOver = true);
+  }
+  return false;
+}
+
+function restartGame() {
+  board = ['', '', '', '', '', '', '', '', ''];
+  playerTime = 0;
+  gameOver = false;
 }
